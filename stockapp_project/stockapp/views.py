@@ -5,8 +5,8 @@ from django.shortcuts import render
 from itsdangerous import Serializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import Productserilizer,Transactionserilizer
-from .models import Product,Transaction
+from .serializers import Productserilizer,Transactionserilizer,categoryserilizer,Inventoryserilizer
+from .models import Category, Product,Transaction,Inventory
 from rest_framework import status
 
 # Create your views here.
@@ -15,15 +15,15 @@ def stock_api(request,product_id=None):
     if request.method ==  'GET':
         id=product_id
         if id is not None:
-            prod = Product.objects.get(product_id=id)
-            serilizer = Productserilizer(prod)
+            prod = Inventory.objects.get(product_id=id)
+            serilizer = Inventoryserilizer(prod)
             return Response(serilizer.data)
-        prod = Product.objects.all()
-        serilizer = Productserilizer(prod,many=True)
+        prod = Inventory.objects.all()
+        serilizer = Inventoryserilizer(prod,many=True)
         return Response(serilizer.data)
 
     if request.method == 'POST':
-        serilizer = Product(data = request.data)
+        serilizer = Category(data = request.data)
         if serilizer.is_valid():
             serilizer.save()
             return Response(serilizer.data,status = status.HTTP_201_CREATED)

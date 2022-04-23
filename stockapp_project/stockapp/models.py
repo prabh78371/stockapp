@@ -19,15 +19,15 @@ class Category(models.Model):
 
 class Inventory(models.Model):
     product = models.ForeignKey(Category,on_delete=models.CASCADE)
-    product_code = models.IntegerField()
     quantity = models.IntegerField()
 
 class Transaction(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     barcode = models.IntegerField()
-    product_code = models.IntegerField()
+    no_of_cartons = models.IntegerField()
     barcode_img = models.ImageField('images',blank=True)
     created_at = models.DateTimeField(auto_now_add=False)
+    
     
         
     def save(self,*args,**kwargs):
