@@ -15,8 +15,8 @@ def stock_api(request,product_id=None):
     if request.method ==  'GET':
         id=product_id
         if id is not None:
-            prod = Inventory.objects.get(product_id=id)
-            serilizer = Inventoryserilizer(prod)
+            prod = Category.objects.get(product_id=id)
+            serilizer = categoryserilizer(prod)
             return Response(serilizer.data)
         prod = Inventory.objects.all()
         serilizer = Inventoryserilizer(prod,many=True)

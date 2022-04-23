@@ -23,6 +23,7 @@ class Inventory(models.Model):
 
 class Transaction(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    prod_code = models.IntegerField()
     barcode = models.IntegerField()
     no_of_cartons = models.IntegerField()
     barcode_img = models.ImageField('images',blank=True)
