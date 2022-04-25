@@ -15,15 +15,15 @@ def stock_api(request,product_id=None):
     if request.method ==  'GET':
         id=product_id
         if id is not None:
-            prod = Category.objects.get(product_id=id)
-            serilizer = categoryserilizer(prod)
+            prod = Inventory.objects.get(product_id=id)
+            serilizer = Inventoryserilizer(prod)
             return Response(serilizer.data)
         prod = Inventory.objects.all()
         serilizer = Inventoryserilizer(prod,many=True)
         return Response(serilizer.data)
 
     if request.method == 'POST':
-        serilizer = Category(data = request.data)
+        serilizer = Inventory(data = request.data)
         if serilizer.is_valid():
             serilizer.save()
             return Response(serilizer.data,status = status.HTTP_201_CREATED)
