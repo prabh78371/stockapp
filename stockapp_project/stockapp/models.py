@@ -10,12 +10,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Product(models.Model):
-    product_id = models.IntegerField()
-    prod_details = models.CharField(max_length=150)
+    barcode_number = models.IntegerField()
+    name = models.CharField(max_length=150)
 
 class Category(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     product_code = models.IntegerField()
+    packs_per_carton = models.IntegerField()
 
 class Inventory(models.Model):
     product = models.ForeignKey(Category,on_delete=models.CASCADE)
