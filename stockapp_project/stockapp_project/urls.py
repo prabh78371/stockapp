@@ -23,6 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('stockapp.urls')),
+    path('api/token/',jwt_views.TokenObtainPairView.as_view(),name ='token_obtain_pair'),
+    path('api/token/refresh/',jwt_views.TokenRefreshView.as_view(),name ='token_refresh'),
 ]
 urlpatterns += static(settings.STATIC_URL,Document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
