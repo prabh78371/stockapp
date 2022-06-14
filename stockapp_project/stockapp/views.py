@@ -8,8 +8,14 @@ from rest_framework.response import Response
 from .serializers import Productserilizer,Transactionserilizer,Categoryserilizer,Inventoryserilizer
 from .models import Category, Product,Transaction,Inventory
 from rest_framework import status
+from rest_framework.decorators import api_view,authentication_classes,permission_classes
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 @api_view(['GET','POST','PUT','PATCH','DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAdminUser])
 def products(request,barcode_number=None):
     if request.method ==  'GET':
         id = barcode_number
@@ -54,6 +60,8 @@ def products(request,barcode_number=None):
         return Response({})
 
 @api_view(['GET','POST','PUT','PATCH','DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAdminUser])
 def category(request,pk=None):
     if request.method ==  'GET':
         id = pk
@@ -97,6 +105,8 @@ def category(request,pk=None):
         return Response({})
 
 @api_view(['GET'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAdminUser])
 def inventory(request):
     if request.method ==  'GET':
         prod = Inventory.objects.all()
@@ -104,6 +114,8 @@ def inventory(request):
         return Response(serilizer.data)
 
 @api_view(['GET','POST','PUT','PATCH','DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def transaction(request,pk=None):
     if request.method ==  'GET':
         id = pk
