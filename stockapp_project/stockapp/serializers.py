@@ -15,7 +15,7 @@ class Productserilizer(serializers.ModelSerializer):
     category_set = Categoryserilizer(many=True,read_only=True)
     class Meta:
         model = Product
-        ffields = ['barcode_number','name','category_set']
+        fields = ['barcode_number','name','category_set']
 
 class Inventoryserilizer(serializers.ModelSerializer):
     class Meta:
