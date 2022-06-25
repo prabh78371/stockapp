@@ -8,7 +8,7 @@ class Categoryserilizer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['product','product_code','packs_per_carton']
-        depth = 1
+        depth = 0
         
 class Productserilizer(serializers.ModelSerializer):
     barcode_number = serializers.HiddenField(default = 1)
@@ -27,4 +27,4 @@ class Transactionserilizer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
-        depth = 3
+        depth = 0
