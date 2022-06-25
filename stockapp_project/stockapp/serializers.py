@@ -3,7 +3,7 @@ from pyexpat import model
 from .models import Product,Inventory,Category,Transaction
 from rest_framework import serializers
        
-class categoryserilizer(serializers.ModelSerializer):
+class Categoryserilizer(serializers.ModelSerializer):
     # product = serializers.HiddenField(default = 1)
     class Meta:
         model = Category
