@@ -7,6 +7,7 @@ from io import BytesIO
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
@@ -33,7 +34,7 @@ class Inventory(models.Model):
     quantity = models.IntegerField()
 
 class Transaction(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     prod_code = models.IntegerField()
     barcode = models.IntegerField()
     no_of_cartons = models.IntegerField()
